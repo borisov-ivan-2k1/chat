@@ -13,5 +13,4 @@ const Auth = () => {
   )
 }
 
-// const WrappedNormalLoginForm = Form.create({ name: 'normal_login' })(Auth)
 export default Auth 
