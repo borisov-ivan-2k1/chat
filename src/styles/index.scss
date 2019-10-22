@@ -1,8 +1,12 @@
 @import '~antd/dist/antd.css';
-// @import '~reset.css';
+@import 'layouts/chat';
 
 *{
     outline: none;
+}
+
+body{
+    background-color: #f4f7fd;
 }
 
 body,
@@ -19,4 +23,20 @@ html,
 
 p{
     margin-bottom: 0;
+}
+
+.ant-btn-circle{
+    border: 0;
+    box-shadow: none;
+    color: #020202 !important;
+    opacity: 0.5;
+    transition: opacity 0.2s ease-in-out;
+
+    &:hover{
+        opacity: 1;
+    }
+
+    &:after{
+        display: none;
+    }
 }

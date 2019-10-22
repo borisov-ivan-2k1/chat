@@ -24,8 +24,9 @@ const MessageAudio = ({ audioSrc }) => {
         audioElem.current.pause()
       }
     }
-
+    
     useEffect(() => {
+      setCurrentTime(audioElem.current.duration - audioElem.current.currentTime)
       audioElem.current.volume = "0.1"
       audioElem.current.addEventListener('playing', () => {
         setIsPlayng(true)
@@ -33,19 +34,18 @@ const MessageAudio = ({ audioSrc }) => {
       audioElem.current.addEventListener('ended', () => {
         setIsPlayng(false)
         setProgress(0)
-        setCurrentTime(0)
+        setCurrentTime(audioElem.current.duration - audioElem.current.currentTime)
       }, false)
       audioElem.current.addEventListener('pause', () => {
         setIsPlayng(false)
       }, false)
       audioElem.current.addEventListener('timeupdate', () => {
         const duration = (audioElem.current && audioElem.current.duration) || 0
-        setCurrentTime(audioElem.current.currentTime)
-        setProgress((audioElem.current.currentTime / duration) * 100)
-
+        const time = (audioElem.current && audioElem.current.currentTime) || 0
+        setCurrentTime(duration - time)
+        setProgress((time / duration) * 100)
       })
     }, [])
-
 
   return (
     <div className='message__audio'>
@@ -53,7 +53,6 @@ const MessageAudio = ({ audioSrc }) => {
       <div className='message__audio-progress'
         style={{ width: progress + '%' }}>
       </div>
-
       <div className='message__audio-info'>
         <div className='message__audio-btn'>
           <button onClick={togglePlay}>
@@ -71,7 +70,6 @@ const MessageAudio = ({ audioSrc }) => {
         <span className='message__audio-duration'>
           {convertCurrentTime(currentTime)}
         </span>
-
       </div>
     </div>
   )
@@ -130,6 +128,7 @@ const Message = ({ avatar, isMe, isReaded, user, audio, text, attachments, date,
 }
 
 Message.defaultProps = {
+  isMe: false,
   user: {},
 }
 
