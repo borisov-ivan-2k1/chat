@@ -9,16 +9,18 @@
         margin-bottom: 15px;
         position: relative;
     }
-
+ 
     &__avatar{
         display: flex;
         flex-direction: column-reverse; 
-        img{
+        .avatar{
         border-radius: 50%;
         width: 33px;
         height: 33px;
         margin-right: 13px;
         margin-bottom: 23px;
+        font-size: 14px;
+        line-height: 32px;
         }
     }
     
@@ -39,8 +41,14 @@
         opacity: 0.5;
     }
 
+    &__text {
+        color: #fff;
+        line-height: 20px;
+    }
+
     &__attachments{
         display: flex;
+        margin-bottom: 5px;
         &-item{
             margin-right: 5px;
             cursor: pointer;

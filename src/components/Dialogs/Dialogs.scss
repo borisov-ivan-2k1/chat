@@ -10,11 +10,23 @@
             padding: 4px 11px 6px;
         }
     }
-     &__item{
+    &__item{
         display: flex;
         margin-bottom: 20px;
         $item: &;
+        &:hover{
+            background-color: #f3f7ff;
+        }
+
+        &--selected,
+        &--selected:hover{
+            background-color: #1890ff;
+            color: #fff !important;
+        }
+
         &-avatar{
+            position: relative;
+            flex: 0 0 40px; /* 2 string in top meybe is bad*/
             width: 40px;
             height: 40px;
             margin-right: 10px;
@@ -82,6 +94,7 @@
                     font-size: 11px;
                     text-align: center;
                     line-height: 17px;
+                    box-shadow: 0 0 0px 3px #fff;
                 }
                 .message__icon-readed{
                     bottom: 0;

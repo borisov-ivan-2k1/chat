@@ -1,7 +1,6 @@
 import React from 'react'
 import { Form, Icon, Input } from 'antd'
-import { ShadowBlock } from 'components'
-import { Button } from 'components'
+import { Button, ShadowBlock } from 'components'
 import { Link } from 'react-router-dom'
 import { validateField } from 'utils/helpers'
 
@@ -13,6 +12,8 @@ const LoginForm = props => {
     handleChange,
     handleBlur,
     handleSubmit,
+    isValid,
+    isSubmitting
   } = props
 
   return (
@@ -53,7 +54,13 @@ const LoginForm = props => {
             />
           </Form.Item>
           <Form.Item>
-            <Button type="primary" htmlType="submit" size="large" className="button login-form-button">
+            <Button 
+            disabled={isSubmitting}
+            onClick={handleSubmit}
+            type="primary" 
+            size="large" 
+            className="button login-form-button"
+            >
               Войти в аккаунт
               </Button >
           </Form.Item>
