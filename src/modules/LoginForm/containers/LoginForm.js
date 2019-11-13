@@ -24,12 +24,16 @@ const LoginFormContainer = withFormik({
 
     handleSubmit: (values, { setSubmitting, props }) => {
         //костыль, но работает
-        store.dispatch(userActions.fetchUserLogin(values)).then(({ status }) => {
+        store.dispatch(userActions.fetchUserLogin(values))
+        .then(({ status }) => {
             if (status === "success") {
               setTimeout(() => {
                 props.history.push("/")
-              }, 50)
+              }, 100)
             }
+            setSubmitting(false)
+          })
+          .catch(() => {
             setSubmitting(false)
           })
         

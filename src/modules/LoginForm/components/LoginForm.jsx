@@ -64,7 +64,7 @@ const LoginForm = props => {
               Войти в аккаунт
               </Button >
           </Form.Item>
-          <Link className='auth__register-link' to='/register'>Зарегистрироваться</Link>
+          <Link className='auth__register-link' to='/signup'>Зарегистрироваться</Link>
         </Form>
       </ShadowBlock>
     </div>

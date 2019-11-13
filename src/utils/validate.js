@@ -1,28 +1,36 @@
 export default ({ isAuth, values, errors }) => {
     const rules = {
-        email: (value) =>{
+        email: (value) => {
             if (!value) {
                 errors.email = 'Введите email'
+            } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
+                errors.email = "Неверный E-Mail";
+            }
+
+        },
+
+        password: value => {
+            if (!value) {
+                errors.password = "Введите пароль";
             } else if (
-                !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(
-                    value
-                )
+                !isAuth &&
+                !/[a-zA-Z0-9_]{7,}/i.test(value)
             ) {
-                errors.email = 'Неправильный адрес электронной почты'
+                errors.password = "Слишком лёгкий пароль";
             }
         },
-    
-        password: (value) =>{
-            if (!value) {
-                errors.password = 'Введите пароль'
-            } else if (
-                !/[a-zA-Z0-9_]{7,}/i.test(
-                    value
-                )
-            ) {
-                errors.password = isAuth ? 'Неверный пароль' : 'Пароль должен быть не менее 7 симфолов'
+        password_2: value => {
+            if (!isAuth && value !== values.password) {
+                errors.password_2 = "Пароли не совпадают";
+            }
+        },
+        fullname: value => {
+            if (!isAuth && !value) {
+                errors.fullname = "Укажите свое имя и фамилию";
             }
         }
     }
+
+    //повзаимствовано
     Object.keys(values).forEach(key => rules[key] && rules[key](values[key]))
 }

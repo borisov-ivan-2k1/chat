@@ -1,9 +1,7 @@
 import React from 'react'
-import { Form, Icon, Input } from 'antd'
-import { ShadowBlock } from 'components'
-import { Button } from 'components'
+import { Form, Icon } from 'antd'
+import { ShadowBlock, Button, FormField } from 'components'
 import { Link } from 'react-router-dom'
-import { validateField } from 'utils/helpers'
 
 const RegisterForm = props => {
   const {
@@ -13,6 +11,8 @@ const RegisterForm = props => {
     handleChange,
     handleBlur,
     handleSubmit,
+    isValid,
+    isSubmitting
   } = props
   const success = false
   return (
@@ -22,65 +22,80 @@ const RegisterForm = props => {
         <p>Для входа в чат, Вам нужно зарегистрироваться</p>
       </div>
       <ShadowBlock>
-        {!success ?
+        {!success ? (
           <Form onSubmit={handleSubmit} className="login-form">
-            <Form.Item
-            validateStatus={validateField('email', touched, errors)}
-            hasFeedback
-            help={!touched.email ? '' : errors.email}>
-              <Input
-                id='email'
-                size="large"
-                prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                placeholder="E-mail"
-                value={values.email}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
-            </Form.Item>
+            <FormField
+              name="email"
+              icon="mail"
+              placeholder="E-Mail"
+              handleChange={handleChange}
+              handleBlur={handleBlur}
+              touched={touched}
+              errors={errors}
+              values={values}
+            />
+
+            <FormField
+              name="fullname"
+              icon="user"
+              placeholder="Ваше имя и фамилия"
+              handleChange={handleChange}
+              handleBlur={handleBlur}
+              touched={touched}
+              errors={errors}
+              values={values}
+            />
+
+            <FormField
+              name="password"
+              icon="lock"
+              placeholder="Пароль"
+              type="password"
+              handleChange={handleChange}
+              handleBlur={handleBlur}
+              touched={touched}
+              errors={errors}
+              values={values}
+            />
+
+            <FormField
+              name="password_2"
+              icon="lock"
+              placeholder="Повторите пароль"
+              type="password"
+              handleChange={handleChange}
+              handleBlur={handleBlur}
+              touched={touched}
+              errors={errors}
+              values={values}
+            />
             <Form.Item>
-              <Input
+              {isSubmitting && !isValid && <span>Ошибка!</span>}
+              <Button
+                disabled={isSubmitting}
+                onClick={handleSubmit}
+                type="primary"
                 size="large"
-                prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                placeholder="Ваше имя"
-              />
-            </Form.Item>
-            <Form.Item validateStatus={validateField('password', touched, errors)}
-            hasFeedback
-            help={!touched.password ? '' : errors.password}>
-              <Input
-                size="large"
-                prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                type="password"
-                id='password'
-                placeholder="Пароль"
-                value={values.password}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
-            </Form.Item>
-            <Form.Item validateStatus={validateField('password', touched, errors)}>
-              <Input
-                size="large"
-                prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                type="password2"
-                placeholder="Повторите пароль"
-              />
-            </Form.Item>
-            <Form.Item>
-              <Button onClick={handleSubmit} type="primary" htmlType="submit" size="large" className="button login-form-button">
+              >
                 Зарегистрироваться
-            </Button >
+              </Button>
             </Form.Item>
-            <Link className='auth__register-link' to='/login'>Войти в аккаунт</Link>
-          </Form> :
-          <div className='auth__success-block'>
-            <div>
-              <Icon type='info-circle' theme='twoTone' />
+            <Link className="auth__register-link" to="/signin">
+              Войти в аккаунт
+            </Link>
+          </Form>
+        ) : (
+            <div className="auth__success-block">
+              <div>
+                <Icon type="info-circle" theme="twoTone" />
+              </div>
+              <h2>Подтвердите свой аккаунт</h2>
+              <p>
+                На Вашу почту отправлено письмо с ссылкой на подтверждение
+                аккаунта.
+            </p>
             </div>
-            <h2>Подтвердите свой аккаунт</h2>
-            <p>На вашу почту было выслано письмо с ссылкой на подтверждение аккаунта.</p>
-          </div>}
+          )}
       </ShadowBlock>
     </div>
   )
