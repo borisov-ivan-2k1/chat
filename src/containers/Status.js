@@ -1,29 +1,29 @@
-import React from "react";
-import { Status as StatusBase } from "components";
-import { connect } from "react-redux";
+import React from 'react'
+import { Status as StatusBase } from 'components'
+import { connect } from 'react-redux'
 
-const ChatInput = ({ currentDialogId, user, dialogs }) => {
+const Status = ({ currentDialogId, user, dialogs }) => {
   if (!dialogs.length || !currentDialogId) {
-    return null;
+    return null
   }
 
   const currentDialogObj = dialogs.filter(
     dialog => dialog._id === currentDialogId
-  )[0];
+  )[0]
 
-  let partner = {};
+  let partner = {}
 
   if (currentDialogObj.author._id === user._id) {
-    partner = currentDialogObj.partner;
+    partner = currentDialogObj.partner
   } else {
-    partner = currentDialogObj.author;
+    partner = currentDialogObj.author
   }
 
-  return <StatusBase online={partner.isOnline} fullname={partner.fullname} />;
-};
+  return <StatusBase online={partner.isOnline} fullname={partner.fullname} />
+}
 
 export default connect(({ dialogs, user }) => ({
   dialogs: dialogs.items,
   currentDialogId: dialogs.currentDialogId,
   user: user.data
-}))(ChatInput);
+}))(Status)

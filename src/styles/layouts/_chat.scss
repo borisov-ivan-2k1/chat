@@ -12,7 +12,7 @@
   
         &-header {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             padding: 21px;
             height: 58px;
             border-bottom: 1px solid #f7f7f7;
@@ -76,13 +76,6 @@
             display: block;
             margin-bottom: 5px; 
         }
-      }
-
-      &-messages {
-          //padding: 20px;
-          //padding-bottom: 0;
-          //overflow: auto;
-          height: calc(100% - 138px);
       }
     }
 }

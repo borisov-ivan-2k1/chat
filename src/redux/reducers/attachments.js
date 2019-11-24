@@ -1,20 +1,18 @@
 const initialState = {
-  items: [],
-  currentDialogId: window.location.pathname.split('dialog/')[1],
-  isLoading: false
+  items: []
 }
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
-    case 'DIALOGS:SET_ITEMS':
+    case 'ATTACHMENTS:SET_ITEMS':
       return {
         ...state,
         items: payload
       }
-    case 'DIALOGS:SET_CURRENT_DIALOG_ID':
+    case 'ATTACHMENTS:REMOVE_ITEM':
       return {
         ...state,
-        currentDialogId: payload
+        items: state.items.filter(item => item.uid !== payload.uid)
       }
     default:
       return state

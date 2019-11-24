@@ -9,6 +9,12 @@
         margin-bottom: 15px;
         position: relative;
     }
+
+    &:hover {
+        #{$self}__icon-actions {
+          display: block;
+        }
+    }
  
     &__avatar{
         display: flex;
@@ -60,12 +66,21 @@
         }
     }
 
-    &__icon-readed{
-        position: absolute;
-        bottom: 22px;
-        left: -25px;
-        &--not{
-            left: -20px;
+    &__icon {
+        &-readed {
+            position: absolute;
+            bottom: 22px;
+            left: -25px;
+                &--not {
+                    left: -20px;
+                }
+            }
+        &-actions {
+          display: none;
+          transform: rotate(90deg);
+          position: absolute;
+          left: -31px;
+          top: -5px;
         }
     }
 

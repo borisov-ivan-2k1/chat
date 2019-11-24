@@ -17,17 +17,17 @@ const RegisterForm = props => {
   const success = false
   return (
     <div>
-      <div className="auth__top">
+      <div className='auth__top'>
         <h2>Регистрация</h2>
         <p>Для входа в чат, Вам нужно зарегистрироваться</p>
       </div>
       <ShadowBlock>
         {!success ? (
-          <Form onSubmit={handleSubmit} className="login-form">
+          <Form onSubmit={handleSubmit} className='login-form'>
             <FormField
-              name="email"
-              icon="mail"
-              placeholder="E-Mail"
+              name='email'
+              icon='mail'
+              placeholder='E-Mail'
               handleChange={handleChange}
               handleBlur={handleBlur}
               touched={touched}
@@ -36,9 +36,9 @@ const RegisterForm = props => {
             />
 
             <FormField
-              name="fullname"
-              icon="user"
-              placeholder="Ваше имя и фамилия"
+              name='fullname'
+              icon='user'
+              placeholder='Ваше имя и фамилия'
               handleChange={handleChange}
               handleBlur={handleBlur}
               touched={touched}
@@ -47,10 +47,10 @@ const RegisterForm = props => {
             />
 
             <FormField
-              name="password"
-              icon="lock"
-              placeholder="Пароль"
-              type="password"
+              name='password'
+              icon='lock'
+              placeholder='Пароль'
+              type='password'
               handleChange={handleChange}
               handleBlur={handleBlur}
               touched={touched}
@@ -59,10 +59,10 @@ const RegisterForm = props => {
             />
 
             <FormField
-              name="password_2"
-              icon="lock"
-              placeholder="Повторите пароль"
-              type="password"
+              name='password_2'
+              icon='lock'
+              placeholder='Повторите пароль'
+              type='password'
               handleChange={handleChange}
               handleBlur={handleBlur}
               touched={touched}
@@ -74,20 +74,20 @@ const RegisterForm = props => {
               <Button
                 disabled={isSubmitting}
                 onClick={handleSubmit}
-                type="primary"
-                size="large"
+                type='primary'
+                size='large'
               >
                 Зарегистрироваться
               </Button>
             </Form.Item>
-            <Link className="auth__register-link" to="/signin">
+            <Link className='auth__register-link' to='/signin'>
               Войти в аккаунт
             </Link>
           </Form>
         ) : (
-            <div className="auth__success-block">
+            <div className='auth__success-block'>
               <div>
-                <Icon type="info-circle" theme="twoTone" />
+                <Icon type='info-circle' theme='twoTone' />
               </div>
               <h2>Подтвердите свой аккаунт</h2>
               <p>

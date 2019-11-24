@@ -7,38 +7,38 @@ import store from 'redux/store'
 
 export default withFormik({
 
-    mapPropsToValues: () => ({
-        email: '',
-        fullname: '',
-        password: '',
-        password_2: '',
-    }),
+  mapPropsToValues: () => ({
+    email: '',
+    fullname: '',
+    password: '',
+    password_2: '',
+  }),
 
-    validate: values => {
-        let errors = {}
+  validate: values => {
+    let errors = {}
 
-        validateForm({ isAuth: false, values, errors })
+    validateForm({ isAuth: false, values, errors })
 
-        return errors
-    },
+    return errors
+  },
 
-    handleSubmit: (values, { setSubmitting, props }) => {
+  handleSubmit: (values, { setSubmitting, props }) => {
 
-        store
-        .dispatch(userActions.fetchUserRegister(values))
-        .then(({ status }) => {
-          if (status === "success") {
-            setTimeout(() => {
-              props.history.push("/");
-            }, 50);
-          }
-          setSubmitting(false);
-        })
-        .catch(() => {
-          setSubmitting(false);
-        });
-    },
+    store
+      .dispatch(userActions.fetchUserRegister(values))
+      .then(({ status }) => {
+        if (status === 'success') {
+          setTimeout(() => {
+            props.history.push('/')
+          }, 50)
+        }
+        setSubmitting(false)
+      })
+      .catch(() => {
+        setSubmitting(false)
+      })
+  },
 
-    displayName: 'RegisterForm',
+  displayName: 'RegisterForm',
 })(RegisterForm)
 

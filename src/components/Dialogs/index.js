@@ -11,7 +11,6 @@ const Dialogs = ({
   onSearch, 
   inputValue, 
   currentDialogId, 
-  onSelectDialog 
 }) => (
   <div className='dialogs'>
     <div className='dialogs__search'>
@@ -22,11 +21,12 @@ const Dialogs = ({
       />
     </div>
     {items.length ? (
+      //поиск по диалогам
       orderBy(items, ['created_at'], ['desc']).map(item => (
         <DialogItem 
-        key={item._id}
-        onSelect={onSelectDialog}  
+        key={item._id}  
         isMe={item.author._id === userId}
+        userId={userId}
         currentDialogId={currentDialogId} 
         {...item} 
         />

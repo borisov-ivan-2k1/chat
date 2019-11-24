@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@babel/core": "7.5.5",
+    "@babel/plugin-transform-async-to-generator": "^7.7.0",
     "@navjobs/upload": "^3.2.0",
     "@svgr/webpack": "4.3.2",
     "@typescript-eslint/eslint-plugin": "1.13.0",
@@ -14,17 +15,17 @@
     "babel-jest": "^24.8.0",
     "babel-loader": "8.0.6",
     "babel-plugin-named-asset-import": "^0.3.3",
-    "babel-preset-react-app": "^9.0.1",
+    "babel-preset-react-app": "^7.0.1",
     "camelcase": "^5.2.0",
     "case-sensitive-paths-webpack-plugin": "2.2.0",
     "classnames": "^2.2.6",
     "css-loader": "2.1.1",
-    "date-fns": "^2.2.1",
+    "date-fns": "^1.30.1",
     "dotenv": "6.2.0",
     "dotenv-expand": "4.2.0",
     "emoji-mart": "^2.11.1",
     "eslint": "^6.1.0",
-    "eslint-config-react-app": "^5.0.1",
+    "eslint-config-react-app": "^3.0.8",
     "eslint-loader": "2.2.1",
     "eslint-plugin-flowtype": "3.13.0",
     "eslint-plugin-import": "2.18.2",
@@ -51,12 +52,14 @@
     "postcss-normalize": "7.0.1",
     "postcss-preset-env": "6.7.0",
     "postcss-safe-parser": "4.0.1",
-    "react": "^16.9.0",
-    "react-app-polyfill": "^1.0.2",
-    "react-dev-utils": "^9.0.3",
-    "react-dom": "^16.9.0",
-    "react-redux": "^7.1.3",
-    "react-router-dom": "^5.0.1",
+    "react": "^16.8.6",
+    "react-app-polyfill": "^0.2.2",
+    "react-dev-utils": "^8.0.0",
+    "react-dom": "^16.8.6",
+    "react-redux": "^7.0.3",
+    "react-router": "^5.0.0",
+    "react-router-dom": "^5.0.0",
+    "react-string-replace": "^0.4.4",
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
     "reset-css": "^4.0.1",
@@ -96,7 +99,7 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:3003",
+  "proxy": "http://localhost:3003/",
   "jest": {
     "roots": [
       "<rootDir>/src"
@@ -148,6 +151,9 @@
   "babel": {
     "presets": [
       "react-app"
+    ],
+    "plugins": [
+      "@babel/plugin-transform-async-to-generator"
     ]
   }
 }

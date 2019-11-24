@@ -1,39 +1,55 @@
-import { messagesApi } from "utils/api";
+import { messagesApi } from 'utils/api'
 
 const Actions = {
   setMessages: items => ({
-    type: "MESSAGES:SET_ITEMS",
+    type: 'MESSAGES:SET_ITEMS',
     payload: items
   }),
   addMessage: message => (dispatch, getState) => {
     const { dialogs } = getState()
-    const { currentDialogId } = dialogs;
+    const { currentDialogId } = dialogs
 
     if (currentDialogId === message.dialog._id) {
       dispatch({
-        type: "MESSAGES:ADD_MESSAGE",
+        type: 'MESSAGES:ADD_MESSAGE',
         payload: message
-      });
+      })
     }
   },
-  fetchSendMessage: (text, dialogId) => dispatch => {
-    messagesApi.send(text, dialogId)
+  fetchSendMessage: ({ text, dialogId, attachments }) => dispatch => {
+    return messagesApi.send(text, dialogId, attachments)
   },
   setIsLoading: bool => ({
-    type: "MESSAGES:SET_IS_LOADING",
+    type: 'MESSAGES:SET_IS_LOADING',
     payload: bool
   }),
+
+  removeMessageById: id => dispatch => {
+    if (window.confirm('Вы действительно хотите удалить сообщение?')) {
+      messagesApi
+        .removeById(id)
+        .then(({ data }) => {
+          dispatch({
+            type: 'MESSAGES:REMOVE_MESSAGE',
+            payload: id
+          })
+        })
+        .catch(() => {
+          dispatch(Actions.setIsLoading(false))
+        })
+    }
+  },
   fetchMessages: dialogId => dispatch => {
-    dispatch(Actions.setIsLoading(true));
+    dispatch(Actions.setIsLoading(true))
     messagesApi
       .getAllByDialogId(dialogId)
       .then(({ data }) => {
-        dispatch(Actions.setMessages(data));
+        dispatch(Actions.setMessages(data))
       })
       .catch(() => {
-        dispatch(Actions.setIsLoading(false));
-      });
+        dispatch(Actions.setIsLoading(false))
+      })
   }
-};
+}
 
-export default Actions;
+export default Actions
