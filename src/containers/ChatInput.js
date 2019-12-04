@@ -93,7 +93,7 @@ const ChatInput = props => {
   const sendMessage = () => {
     if (isRecording) {
       mediaRecorder.stop()
-    } else if (value) {
+    } else if (value != 0 || attachments != 0) {
       fetchSendMessage({
         text: value,
         dialogId: currentDialogId,
@@ -107,6 +107,7 @@ const ChatInput = props => {
   const handleSendMessage = e => {
     socket.emit('DIALOGS:TYPING', { dialogId: currentDialogId, user })
     if (e.keyCode === 13) {
+      e.preventDefault()
       sendMessage()
     }
   }

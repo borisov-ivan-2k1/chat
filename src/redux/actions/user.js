@@ -51,8 +51,23 @@ const Actions = {
       })
   },
   fetchUserRegister: postData => dispatch => {
-    return userApi.signUp(postData).then(({ data }) => {
+    return userApi.signUp(postData)
+    .then(({ data }) => {
+      openNotification({
+        title: 'Отлично!',
+        text: 'Регистрация прошла успешно, войдите для продолжения.',
+        type: 'success'
+      })
       return data
+    })
+    .catch(({ response }) => {
+      if (response.status === 500) {
+        openNotification({
+          title: 'Ошибка при регистрации',
+          text: 'Пользователь с такой почтой уже существует',
+          type: 'error'
+        })
+      }
     })
   }
 }

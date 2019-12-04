@@ -26,6 +26,8 @@ const Messages = ({
         ref={blockRef}
         className={classNames('messages', { 'messages--loading': isLoading })}
       >
+        {console.log(user)
+        }
         {isLoading && !user ? (
           <Spin size='large' tip='Загрузка сообщений...' />
         ) : items && !isLoading ? (
@@ -48,7 +50,8 @@ const Messages = ({
         {isTyping && (
           <Message
             isTyping={true}
-            user={{ fullname: 'qwe', _id: 'qweqw12312312' }}
+            user={{ fullname: user.fullname, _id: user._id }}
+            
           />
         )}
         <Modal

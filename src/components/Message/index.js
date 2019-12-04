@@ -17,7 +17,6 @@ const MessageAudio = ({ audioSrc }) => {
   const audioElem = useRef(null)
   const [isPlayng, setIsPlayng] = useState(false)
   const [currentTime, setCurrentTime] = useState(0)
-  const [progress, setProgress] = useState(0)
 
   const togglePlay = () => {
     if (!isPlayng) {
@@ -28,33 +27,26 @@ const MessageAudio = ({ audioSrc }) => {
   }
 
   useEffect(() => {
-    setCurrentTime(audioElem.current.duration - audioElem.current.currentTime)
-    audioElem.current.volume = '0.1'
+    audioElem.current.volume = '1'
     audioElem.current.addEventListener('playing', () => {
       setIsPlayng(true)
     }, false)
     audioElem.current.addEventListener('ended', () => {
       setIsPlayng(false)
-      setProgress(0)
-      setCurrentTime(audioElem.current.duration - audioElem.current.currentTime)
+      setCurrentTime(0)
     }, false)
     audioElem.current.addEventListener('pause', () => {
       setIsPlayng(false)
     }, false)
     audioElem.current.addEventListener('timeupdate', () => {
-      const duration = (audioElem.current && audioElem.current.duration) || 0
-      const time = (audioElem.current && audioElem.current.currentTime) || 0
-      setCurrentTime(duration - time)
-      setProgress((time / duration) * 100)
+      setCurrentTime(audioElem.current.currentTime)
+      
     })
   }, [])
 
   return (
     <div className='message__audio'>
       <audio ref={audioElem} src={audioSrc} preload='auto'></audio>
-      <div className='message__audio-progress'
-        style={{ width: progress + '%' }}>
-      </div>
       <div className='message__audio-info'>
         <div className='message__audio-btn'>
           <button onClick={togglePlay}>
@@ -142,13 +134,14 @@ const Message = ({
           <Avatar user={user} />
         </div>
         <div className='message__info'>
-          {(text || isTyping) && (
+          {(text && text.length > 1 || isTyping) && (
             <div className='message__bubble'>
               {text && (
+                
                 <p className='message__text'>
                   {/* регулярка взята из интернета */}
                   {reactStringReplace(text, /:(.+?):/g, (match, i) => (
-                    <Emoji emoji={match} set='apple' size={16} />
+                    <Emoji emoji={match} set='apple' size={16} key={i}/>
                   ))}
                 </p>
               )}
