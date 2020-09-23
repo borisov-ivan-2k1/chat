@@ -1,6 +1,6 @@
 import { withFormik } from 'formik'
 import { userActions } from 'redux/actions'
-import RegisterForm from '../components/RegisterForm'
+import Registration from '../components/Registration'
 import validateForm from 'utils/validate'
 
 import store from 'redux/store'
@@ -39,6 +39,6 @@ export default withFormik({
       })
   },
 
-  displayName: 'RegisterForm',
-})(RegisterForm)
+  displayName: 'Registration',
+})(Registration)
 

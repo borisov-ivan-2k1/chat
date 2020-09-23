@@ -4,9 +4,9 @@ import { Messages, Status, ChatInput, Sidebar } from 'containers'
 import { connect } from 'react-redux'
 
 import { dialogsActions } from 'redux/actions'
-import './Home.scss'
+import './MainPage.scss'
 
-const Home = props => {
+const MainPage = props => {
 
   const { setCurrentDialogId, user } = props
 
@@ -18,16 +18,16 @@ const Home = props => {
 
   return (
 
-    <section className='home'>
-      <div className='chat'>
+    <section className='main-page'>
+      <div className='messenger'>
         <Sidebar />
 
         {user && (
-          <div className='chat__dialog'>
+          <div className='messenger__dialog'>
             <div />
             <Status />
             <Messages />
-            <div className='chat__dialog-input'>
+            <div className='messenger__dialog-input'>
               <ChatInput />
             </div>
           </div>
@@ -41,5 +41,5 @@ export default withRouter(
   connect(
     ({ user }) => ({ user: user.data }),
     dialogsActions
-  )(Home)
+  )(MainPage)
 )

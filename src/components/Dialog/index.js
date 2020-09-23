@@ -4,9 +4,9 @@ import format from 'date-fns/format'
 import isToday from 'date-fns/is_today'
 import { Link } from 'react-router-dom'
 
-import { IconReaded, Avatar } from '../'
-import { isAudio } from 'utils/helpers'
+import { IconReaded, Avatar } from '..'
 
+//преобразование даты в зависимости от вреени
 const getMessageTime = createdAt => {
   if (isToday(createdAt)) {
     return format(createdAt, 'HH:mm')
@@ -23,20 +23,19 @@ const renderLastMessage = (message, userId) => {
   } else {
     text = message.text
   }
-
+  // если последнее сообщение отправлено автором, то вывести перед сообщением "Вы"
   return `${message.user._id === userId ? 'Вы: ' : ''}${text}`
 }
 
-const DialogItem = ({
+const Dialog = ({
   _id,
-  unread,
-  created_at,
-  text,
   isMe,
   currentDialogId,
   partner,
   userId,
-  lastMessage
+  lastMessage,
+  author
+  
 
 }) => (
     <Link to={`/dialog/${_id}`}>
@@ -46,12 +45,14 @@ const DialogItem = ({
       })}
       >
         <div className='dialogs__item-avatar'>
-          <Avatar user={partner} />
+          {isMe ? <Avatar user={partner} /> : <Avatar user={author} />}
         </div>
         <div className='dialogs__item-info'>
           <div className='dialogs__item-info-top'>
-            <b>{partner.fullname}</b>
+            {isMe ? <b>{partner.fullname}</b> : <b>{author.fullname}</b>}
+            
             <span>
+              {/* время отправки сообщения */}
               {getMessageTime(lastMessage.createdAt)}
             </span>
           </div>
@@ -59,16 +60,12 @@ const DialogItem = ({
             <p>
               {renderLastMessage(lastMessage, userId)}
             </p>
+            {/* если последнее сообщение от автора диалога, то отобразить значок прочитано/непрочитано */}
             {isMe && <IconReaded isMe={isMe} isReaded={lastMessage.readed} />}
-            {lastMessage.unread > 0 && (
-              <div className='dialogs__item-info-bottom-count'>
-                {lastMessage.unread > 99 ? '99' : lastMessage.unread}
-              </div>
-            )}
           </div>
         </div>
       </div>
     </Link>
   )
 
-export default DialogItem
+export default Dialog

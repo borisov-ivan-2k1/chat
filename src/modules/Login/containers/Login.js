@@ -1,11 +1,11 @@
 import { withFormik } from 'formik'
-import LoginForm from '../components/LoginForm'
+import Login from '../components/Login'
 import validateForm from 'utils/validate'
 import { userActions } from 'redux/actions'
 
 import store from 'redux/store'
 
-const LoginFormContainer = withFormik({
+const LoginContainer = withFormik({
 
     enableReinitialize: true,
 
@@ -37,7 +37,7 @@ const LoginFormContainer = withFormik({
         
     },
 
-    displayName: 'LoginForm',
-})(LoginForm)
+    displayName: 'Login',
+})(Login)
 
-export default LoginFormContainer
+export default LoginContainer

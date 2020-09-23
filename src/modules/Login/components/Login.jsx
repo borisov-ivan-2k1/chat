@@ -4,7 +4,8 @@ import { Button, ShadowBlock } from 'components'
 import { Link } from 'react-router-dom'
 import { validateField } from 'utils/helpers'
 
-const LoginForm = props => {
+// большая часть кода взята из документации antdesign
+const Login = props => {
   const {
     values,
     touched,
@@ -26,7 +27,6 @@ const LoginForm = props => {
         <Form onSubmit={handleSubmit} className='login-form'>
           <Form.Item
             validateStatus={validateField('email', touched, errors)}
-            // !touched.email ? '' : errors.email ? 'error' : 'success'
             hasFeedback
             help={!touched.email ? '' : errors.email}>
             <Input
@@ -72,4 +72,4 @@ const LoginForm = props => {
   )
 }
 
-export default LoginForm
+export default Login

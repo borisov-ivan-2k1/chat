@@ -1,7 +1,7 @@
 import React from 'react'
 import orderBy from 'lodash/orderBy'
 import { Input, Empty } from 'antd'
-import { DialogItem } from '../'
+import { Dialog } from '../'
 
 import './Dialogs.scss'
 
@@ -11,7 +11,9 @@ const Dialogs = ({
   onSearch, 
   inputValue, 
   currentDialogId, 
-}) => (
+}) =>
+   (
+    
   <div className='dialogs'>
     <div className='dialogs__search'>
       <Input.Search
@@ -23,12 +25,15 @@ const Dialogs = ({
     {items.length ? (
       //поиск по диалогам
       orderBy(items, ['created_at'], ['desc']).map(item => (
-        <DialogItem 
+        <Dialog 
         key={item._id}  
         isMe={item.author._id === userId}
         userId={userId}
-        currentDialogId={currentDialogId} 
+        currentDialogId={currentDialogId}
+        partner={item.partner} 
+        author={item.author}
         {...item} 
+        
         />
       ))
     ) : (

@@ -3,7 +3,7 @@ import { Form, Icon } from 'antd'
 import { ShadowBlock, Button, FormField } from 'components'
 import { Link } from 'react-router-dom'
 
-const RegisterForm = props => {
+const Registration = props => {
   const {
     values,
     touched,
@@ -102,4 +102,4 @@ const RegisterForm = props => {
 }
 
 
-export default RegisterForm
+export default Registration

@@ -39,7 +39,7 @@ const MessageAudio = ({ audioSrc }) => {
       setIsPlayng(false)
     }, false)
     audioElem.current.addEventListener('timeupdate', () => {
-      setCurrentTime(audioElem.current.currentTime)
+      setCurrentTime(audioElem.current.currentTime);
       
     })
   }, [])
@@ -78,7 +78,6 @@ const Message = ({
   text,
   attachments,
   date,
-  isTyping,
   onRemoveMessage,
   setPreviewImage
 }) => {
@@ -107,7 +106,7 @@ const Message = ({
 
     <div className={classNames('message', {
       'message--isme': isMe,
-      'message--is-typing': isTyping,
+      // 'message--is-typing': isTyping,
       'message--is-audio': isAudio(attachments),
       'message--image': !isAudio(attachments) &&
         attachments &&
@@ -134,7 +133,7 @@ const Message = ({
           <Avatar user={user} />
         </div>
         <div className='message__info'>
-          {(text && text.length > 1 || isTyping) && (
+          {(text && text.length > 1) && (
             <div className='message__bubble'>
               {text && (
                 
@@ -145,13 +144,13 @@ const Message = ({
                   ))}
                 </p>
               )}
-              {isTyping && (
+              {/* {isTyping && (
                 <div className='message__typing'>
                   <span />
                   <span />
                   <span />
                 </div>
-              )}
+              )} */}
               {
                 audio && <MessageAudio audioSrc={null} />
               }

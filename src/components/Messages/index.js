@@ -6,7 +6,7 @@ import classNames from 'classnames'
 import { Message } from '../'
 import './Messages.scss'
 
-const Messages = ({
+const Messages = ({ 
   onRemoveMessage,
   blockRef,
   isLoading,
@@ -26,8 +26,7 @@ const Messages = ({
         ref={blockRef}
         className={classNames('messages', { 'messages--loading': isLoading })}
       >
-        {console.log(user)
-        }
+
         {isLoading && !user ? (
           <Spin size='large' tip='Загрузка сообщений...' />
         ) : items && !isLoading ? (
@@ -47,13 +46,13 @@ const Messages = ({
         ) : (
               <Empty description='Откройте диалог' />
             )}
-        {isTyping && (
+        {/* {isTyping && (
           <Message
             isTyping={true}
             user={{ fullname: user.fullname, _id: user._id }}
             
           />
-        )}
+        )} */}
         <Modal
           visible={!!previewImage}
           onCancel={() => setPreviewImage(null)}
